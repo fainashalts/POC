@@ -29,6 +29,18 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.9'
 
+#Add factory girl
+gem 'factory_girl_rails'
+
+group :development, :test do
+
+  #add in the gem for rspec
+  gem 'rspec-rails', '~> 3.0'
+
+   #add validation-association matchers
+  gem 'shoulda-matchers', require: false
+end
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
