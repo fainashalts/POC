@@ -9,7 +9,11 @@
 				</div>
 
 				<div>
-					<%= link_to "Edit user!", edit_user_path(u) %> 
+					<%= u.email %> 
+				</div>
+
+				<div>
+					<%= link_to "Users list!", users_path(u) %> 
 					<%= link_to "Delete user!", user_path(u), method: :delete %>
 				</div>		
 				<% end %>
