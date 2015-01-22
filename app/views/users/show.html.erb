@@ -1,0 +1,13 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="form-group">
+			<h2>User<%= u.first_name %> <%= u.last_name %> </h2>
+			<ul>
+				<%= link_to "Edit user!", edit_user_path %>
+					<li> <%= u.name %> </li>
+					<li> <%= u.email %></li>
+				<% end %>
+			</ul>
+		</div> <!-- form-group -->
+	</div> <!-- row -->
+</div> <!-- container-fluid -->
