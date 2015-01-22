@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
    root to: "links#index"
 
   #sessions routes
@@ -9,7 +10,8 @@ Rails.application.routes.draw do
   #users routes
   get 'users/' => 'users#index'
 
-  get '/signup' => 'users#new', as: :new_user
+  # This is commented out because we're now using devise for the signup page
+  # get '/signup' => 'users#new', as: :new_user
   
   get 'users/:id' => 'users#show', as: :user
 
@@ -20,6 +22,12 @@ Rails.application.routes.draw do
   patch 'users/:id' => 'users#update', as: :update_user
 
   delete 'users/:id' => 'users#destroy'
+
+  # This allows us to use devise for our routes
+  devise_scope :user do
+    get "signin", to: "devise/sessions#new"
+    get "signup", to: "devise/registrations#new"
+  end
 
   #topics routes
   get 'topics/' => 'topics#index'

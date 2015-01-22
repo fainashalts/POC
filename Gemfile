@@ -32,6 +32,10 @@ gem 'bcrypt', '~> 3.1.9'
 #Add factory girl
 gem 'factory_girl_rails'
 
+# Add Devise
+
+gem 'devise'
+
 group :development, :test do
 
   #add in the gem for rspec
