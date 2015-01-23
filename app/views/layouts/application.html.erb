@@ -8,20 +8,23 @@
 </head>
 <body>
 
-<h1>Party On Code!</h1>
-<% if user_signed_in? %>
-   		<ul>
-			<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-		</ul>
-<% else %>
-   		<ul>
-			<li><%= link_to "Sign In", signin_path %></li>
-		</ul>
-<% end %>
-		
+	<nav class="navbar">
+		<h1>Party On Code!</h1>
 
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+		<% if user_signed_in? %>
+		   		<ul>
+					<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+				</ul>
+		<% else %>
+		   		<ul>
+					<li><%= link_to "Sign In", signin_path %></li>
+				</ul>
+		<% end %>
+	</nav>	
+
+		<p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
+
 
 
 
