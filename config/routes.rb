@@ -46,19 +46,11 @@ Rails.application.routes.draw do
 
   #links routes
 
-  get 'links/' => 'links#index'
-  
-  get 'links/new' => 'links#new', as: :new_link
-  
-  get 'links/:id' => 'links#show', as: :link
-  
-  post 'links/' => 'links#create'
-  
-  get 'links/:id/edit' => 'links#edit', as: :edit_link
-  
-  patch 'links/:id' => 'links#update'
-
-  delete 'links/:id' => 'links#destroy'
+  resources :links do
+    member do 
+      put "like", to: "links#upvote"
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
