@@ -36,6 +36,8 @@ gem 'factory_girl_rails'
 
 gem 'devise'
 
+gem 'acts_as_votable', '~> 0.10.0'
+
 group :development, :test do
 
   #add in the gem for rspec
