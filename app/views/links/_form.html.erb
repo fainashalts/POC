@@ -1,0 +1,28 @@
+<%= form_for [@user, @link] do |f| %>
+
+	<div>
+		<%= f.label :title %>
+		<%= f.text_field :title %>
+	</div>
+
+	<div>
+		<%= f.label :url %>
+		<%= f.text_field :url %>
+	</div>
+
+	<div>
+		<%= f.label :topic %>
+		<%= f.collection_select :topic, Topic.all, :id, :name %>
+		<!-- We can add an option to create a topic here if we decide that users can create topics -->
+	</div>
+
+<!-- ADD COLLECTION FIELD FOR SUBTOPIC WHEN RELATIOSNHIP BETWEEN LINKS AND SUBTOPICS HAS BEEN ESTABLSIHED -->
+	
+
+
+
+	<div>
+		<%= f.submit "Add This Link!" %>
+	</div>
+
+<% end %>
