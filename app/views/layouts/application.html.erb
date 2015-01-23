@@ -8,8 +8,25 @@
 </head>
 <body>
 
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+<h1>Party On Code!</h1>
+<% if user_signed_in? %>
+   		<ul>
+			<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+		</ul>
+<% else %>
+   		<ul>
+			<li><%= link_to "Sign In", signin_path %></li>
+		</ul>
+<% end %>
+		
+
+
+	<% end %>
+
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+
+
 
 
 <%= yield %>
