@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+skip_before_action :admin, only: [:index, :show]
 
 	def index
 		@topics = Topic.all
