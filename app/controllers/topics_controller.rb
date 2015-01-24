@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+before_filter :custom_method, except: [:index, :show]
 
 
 	def index
@@ -52,5 +53,17 @@ class TopicsController < ApplicationController
 		params.require(:topic).permit(:name)
 	end
 
+	def custom_method
+	  
+	  authenticate_user!
+
+	  if current_user.admin
+	     return
+	  else
+	     redirect_to root_url
+	  end
+
+	end
+	
 end
 
