@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+before_filter :correct_user, only: [:edit, :update, :destroy]
 
 	def index
 			@users = User.all
@@ -50,6 +50,14 @@ class UsersController < ApplicationController
 
 		def user_params
 			params.require(:user).permit(:name, :email, :password, :password_confirm)
+		end
+
+		def correct_user
+			authenticate_user!
+			unless @user == current_user || current_user.admin?
+				redirect_to (root_path)
+				flash[:error]
+			end
 		end
 
 
