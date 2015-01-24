@@ -2,7 +2,7 @@
 
 
 <!-- This will display all of the links in our database, regardless of their user  -->
-<% @links.each do  |link| %>
+<% @links.order(:cached_votes_total => :desc).each do  |link| %>
 
 	<ul>
 		<li><%= link.title %></li>
