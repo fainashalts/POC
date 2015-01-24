@@ -1,5 +1,5 @@
 class SubtopicsController < ApplicationController
-
+before_filter :custom_method, except: [:index, :show]
 
 def index
 		@subtopics = Subtopic.all
@@ -52,6 +52,18 @@ def index
 		params.require(:subtopic).permit(:topic_id, :name)
 	end
 
+	def custom_method
+		  
+		  authenticate_user!
+
+		  if current_user.admin
+		     return
+		  else
+		     redirect_to root_url
+		  end
+
+		end
+		
 end
 
 

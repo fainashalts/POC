@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-	
+before_filter :custom_method, :only => [:edit, :destroy]	
 	
 	def upvote
 		@link = Link.find(params[:id])
@@ -59,7 +59,17 @@ class LinksController < ApplicationController
 		end
 
 
+		def custom_method
+		  
+		  authenticate_user!
 
+		  if current_user.admin
+		     return
+		  else
+		     redirect_to root_url
+		  end
+
+		end
 
 
 
