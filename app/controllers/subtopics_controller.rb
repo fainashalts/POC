@@ -1,5 +1,5 @@
 class SubtopicsController < ApplicationController
-skip_before_action :admin, only: [:index, :show]
+
 
 def index
 		@subtopics = Subtopic.all
