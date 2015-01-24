@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-	skip_before_action :admin, only: [:index, :show, :new, :create]
+	
 	
 	def upvote
 		@link = Link.find(params[:id])
