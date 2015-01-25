@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124222154) do
+ActiveRecord::Schema.define(version: 20150125210820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(version: 20150124222154) do
   add_index "links", ["cached_weighted_average"], name: "index_links_on_cached_weighted_average", using: :btree
   add_index "links", ["cached_weighted_score"], name: "index_links_on_cached_weighted_score", using: :btree
   add_index "links", ["cached_weighted_total"], name: "index_links_on_cached_weighted_total", using: :btree
+
+  create_table "scrapes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "subtopics", force: true do |t|
     t.integer  "topic_id"

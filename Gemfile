@@ -32,6 +32,9 @@ gem 'bcrypt', '~> 3.1.9'
 # Add Bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
 
+# grabbit uses HTTParty to grab a remote page, and then uses Nokigiri gem to parse the document to return the requested data
+gem 'grabbit'
+
 #Add factory girl
 gem 'factory_girl_rails'
 
