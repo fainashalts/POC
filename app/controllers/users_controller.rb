@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+# added a before filter here to ensure that users can only edit and destroy their own profiles(unless they are an administrator)
 before_filter :correct_user, only: [:edit, :update, :destroy]
 
+	# basic CRUD functionality
 	def index
 			@users = User.all
 		end
@@ -52,11 +54,12 @@ before_filter :correct_user, only: [:edit, :update, :destroy]
 			params.require(:user).permit(:name, :email, :password, :password_confirm)
 		end
 
+		# because we're using devise, it would be more complicated to add functions and before filters to the application controller(because devise generates many of its own controllers for the gem to work), so we are adding them in the private methods here.
 		def correct_user
 			authenticate_user!
 			unless @user == current_user || current_user.admin?
 				redirect_to (root_path)
-				flash[:error]
+				flash[:alert]
 			end
 		end
 

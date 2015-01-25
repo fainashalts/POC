@@ -12,6 +12,7 @@
 
 	<% end %>
 
+<!-- the code below allows users to edit and delete their own profiles. If you as the user are viewing someone else's profile, then you would not see the options to edit or delete. A before_filter has also been placed in the users controller to protect users from other users changing their information. -->
 <% if current_user %>
 	<%= link_to "Edit Your Profile", edit_user_registration_path %>
 	<%= link_to "Delete Your Profile", user_registration_path, method: :delete %>

@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+# before filter to give only administrators the ability to add, edit, and delete topics.
 before_filter :custom_method, except: [:index, :show]
 
 
@@ -53,6 +54,7 @@ before_filter :custom_method, except: [:index, :show]
 		params.require(:topic).permit(:name)
 	end
 
+	# custom method for the topics controller, please see before filter above
 	def custom_method
 	  
 	  authenticate_user!
