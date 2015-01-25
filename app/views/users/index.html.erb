@@ -4,5 +4,6 @@
 
 <% @users.each do |u| %>
 <%= u.email %>
+<%= link_to "View User's Profile", user_path(u) %>
 <%end%>
 
