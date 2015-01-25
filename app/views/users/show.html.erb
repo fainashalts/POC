@@ -1,8 +1,8 @@
-<h1><%= @user.first_name %><%= @user.last_name %>
+<h1><%= @user.name %></h1>
 
 
 <!-- This displays each of the links that a specific user has posted -->
-	<% @user.links.each do |link| %>
+	<% @user.find_voted_items.each do |link| %>
 
 		<ul>
 			<li><%= link.title %></li>
