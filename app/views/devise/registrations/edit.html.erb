@@ -3,6 +3,9 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+  <!-- would like to add an option for users to change their name, but was not showing up when using the format for email below -->
+
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
