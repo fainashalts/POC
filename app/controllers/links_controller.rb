@@ -22,12 +22,21 @@ before_filter :custom_method, :only => [:edit, :destroy]
 
 		def create
 			@link = Link.new(link_params)
+			@scrape = Link.find_by(params[:id])
 
 			if @link.save
+				respond_to do |format|
+				if @scrape.valid
+					format.js
+				else
+					format.js {render "error"}
+				end
+			end
 				redirect_to links_path
 			else
 				render :new
 			end
+
 		end
 
 		def edit

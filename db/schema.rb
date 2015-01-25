@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125210820) do
+ActiveRecord::Schema.define(version: 20150125215128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150125210820) do
   create_table "scrapes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
   create_table "subtopics", force: true do |t|
