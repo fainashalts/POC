@@ -7,6 +7,7 @@
 	<ul>
 		<li><%= link.title %></li>
 		<li><%= link.url %></li>
+        <li><% if current_user.try(:admin?)%><%= link_to "View Link", link_path(link) %><%end%></li>
 		<!-- If we want to display the user who posted each link, we need to customize some stuff in devise.  As of right now, devise doesn't ask for our name when we sign up, so link.user.name doesn't work. -->
 
 
