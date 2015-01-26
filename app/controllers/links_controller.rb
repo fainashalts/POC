@@ -1,6 +1,9 @@
+require 'link_thumbnailer'
+
 class LinksController < ApplicationController
 # before filter so that only admins can edit and destroy links; might want to allow the user who added a link to edit it (say, if they typed something incorrectly). Something we as a group should decide.
 before_filter :custom_method, :only => [:edit, :destroy]	
+
 	
 	def upvote
 		@link = Link.find(params[:id])
@@ -19,6 +22,8 @@ before_filter :custom_method, :only => [:edit, :destroy]
 
 	def index
 			@links = Link.all
+			@fetch = LinkThumbnailer.generate("http://www.google.com")
+
 		end
 
 		def show
