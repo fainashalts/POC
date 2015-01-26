@@ -9,8 +9,8 @@
 		<li><%= link.url %></li>
         <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
         <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
-		<!-- If we want to display the user who posted each link, we need to customize some stuff in devise.  As of right now, devise doesn't ask for our name when we sign up, so link.user.name doesn't work. -->
-
+		<!-- Displays the user name of the user who posted the link -->
+        <li><%= link.user.name %></li>
 
 
     	<!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->

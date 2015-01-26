@@ -21,9 +21,11 @@ before_filter :custom_method, :only => [:edit, :destroy]
 		end
 
 		def create
-			@link = Link.new(link_params)
+			
+			# using the current_user helper specifies that each created link will belong to the user who posted it, which makes all of the link's owner's attributes accessible in the link views
+			link = current_user.links.create(link_params)
 
-			if @link.save
+			if link.save
 				redirect_to links_path
 			else
 				render :new
