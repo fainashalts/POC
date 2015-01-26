@@ -8,6 +8,15 @@ before_filter :custom_method, :only => [:edit, :destroy]
 		redirect_to links_path
 	end
 
+	def fetch
+		@link = LinkThumbnailer.generate(params[:url])
+		respond_to do |format|
+			format.json do
+				result.to_json
+			end
+		end
+	end
+
 	def index
 			@links = Link.all
 		end
