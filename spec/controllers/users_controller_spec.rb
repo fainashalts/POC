@@ -1,5 +1,6 @@
 RSpec.describe UsersController, :type => :controller do 
-
+  
+  #INDEX
   describe "GET #index" do
     it "responds successfully with an HTTP 200 status code" do 
       get :index
@@ -13,18 +14,27 @@ RSpec.describe UsersController, :type => :controller do
     end 
   end
 
+  #SHOW
   describe "GET #show" do
     it "assigns the requested user to @user" do
       user = FactoryGirl.create(:user)
       get :show, id: user
-      assigns(:user).should eq(user)
+      expect(assigns(:user)).to eq(user)
     end
 
     it "renders the #show view" do
       user = FactoryGirl.create(:user)
       get :show, id: user
-      response.should render_template :show
+      expect(response).to render_template :show
     end
+
+  #NEW
+  #describe "GET #new" do 
+    #it "assigns the "
+  #end
+    #CREATE
+    #EDIT
+    #UPDATE
 
   end
 
