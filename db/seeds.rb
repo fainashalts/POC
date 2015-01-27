@@ -13,3 +13,7 @@
 		{name: "HTML"},
 		{name: "CSS"}
 	])
+
+  subtopic = Subtopic.create([
+    {name: "EmberJS", topic_id: 1}
+    ]) 

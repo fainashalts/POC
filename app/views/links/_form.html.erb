@@ -13,7 +13,7 @@
 
 	<div>
 		<%= f.label :topic %>
-		<%= f.collection_select :topic, Topic.all, :id, :name %>
+		<%= f.grouped_collection_select :subtopic_id, Topic.order(:name), :subtopics, :name, :id, :name %>
 		<!-- We can add an option to create a topic here if we decide that users can create topics -->
 	</div>
 
