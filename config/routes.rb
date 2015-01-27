@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   delete 'users/:id' => 'users#destroy'
 
   # This allows us to use devise for our routes
+  
   devise_scope :user do
     get "signin", to: "devise/sessions#new"
     get "signup", to: "devise/registrations#new"
