@@ -11,17 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127020039) do
+ActiveRecord::Schema.define(version: 20150127071642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: true do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "link_id"
+  end
 
   create_table "links", force: true do |t|
     t.string   "title"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.integer  "cached_votes_total",      default: 0
     t.integer  "cached_votes_score",      default: 0
     t.integer  "cached_votes_up",         default: 0
@@ -29,7 +36,9 @@ ActiveRecord::Schema.define(version: 20150127020039) do
     t.integer  "cached_weighted_score",   default: 0
     t.integer  "cached_weighted_total",   default: 0
     t.float    "cached_weighted_average", default: 0.0
+    t.integer  "user_id"
     t.integer  "subtopic_id"
+    t.integer  "topic_id"
   end
 
   add_index "links", ["cached_votes_down"], name: "index_links_on_cached_votes_down", using: :btree
@@ -39,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150127020039) do
   add_index "links", ["cached_weighted_average"], name: "index_links_on_cached_weighted_average", using: :btree
   add_index "links", ["cached_weighted_score"], name: "index_links_on_cached_weighted_score", using: :btree
   add_index "links", ["cached_weighted_total"], name: "index_links_on_cached_weighted_total", using: :btree
+  add_index "links", ["user_id"], name: "index_links_on_user_id", using: :btree
 
   create_table "subtopics", force: true do |t|
     t.integer  "topic_id"
@@ -56,9 +66,9 @@ ActiveRecord::Schema.define(version: 20150127020039) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
