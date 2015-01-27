@@ -58,7 +58,7 @@ before_filter :custom_method, :only => [:edit, :destroy]
 		private
 
 		def link_params
-			params.require(:link).permit(:title, :url, :subtopic_id)
+			params.require(:link).permit(:title, :url, :subtopic_id, :user_id)
 		end
 
 
