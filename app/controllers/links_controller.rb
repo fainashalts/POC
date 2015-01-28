@@ -9,7 +9,11 @@ before_filter :custom_method, :only => [:edit, :destroy]
 	end
 
 	def index
+			@user = current_user
+
+			@link = Link.new
 			@links = Link.all
+			
 		end
 
 		def show
@@ -17,11 +21,13 @@ before_filter :custom_method, :only => [:edit, :destroy]
 		end
 
 		def new
+
 			@link = Link.new
 		end
 
 		def create
 			
+
 			# using the current_user helper specifies that each created link will belong to the user who posted it, which makes all of the link's owner's attributes accessible in the link views
 			link = current_user.links.create(link_params)
 
