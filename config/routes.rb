@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     get "signup", to: "devise/registrations#new"
   end
 
-  # scope shallow_prefix: "direct" do
+
     resources :topics do
       resources :subtopics
     end
@@ -40,8 +40,7 @@ Rails.application.routes.draw do
     resources :links do
       member do 
         put "like", to: "links#upvote"
-      end
-        
+      end 
       resources :comments, except: :index
     end  
     

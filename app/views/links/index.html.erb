@@ -12,7 +12,7 @@
           
           <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
           <!-- we need a topic ID to use topic path- the confusing looking paramater being passed into topic_path is calling the topic ID through a link's subtopic -->
-          <li><% if current_user.try(:admin?)%><%= link_to 'Delete', topic_path(link.subtopic.topic.id), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
+          <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
           
           <!-- Displays the user name of the user who posted the link -->
           <li><%= link.user.name %></li>

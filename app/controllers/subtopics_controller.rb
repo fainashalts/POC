@@ -42,7 +42,7 @@ def index
 	def destroy
 		@subtopic = Subtopic.find(params[:id])
 		@subtopic.destroy
-		redirect_to subtopics_path
+		redirect_to :back
 	end
 
 	

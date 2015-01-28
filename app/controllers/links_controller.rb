@@ -53,7 +53,7 @@ before_filter :custom_method, :only => [:edit, :destroy]
 	def destroy
 			@link = Link.find(params[:id])
 			@link.destroy
-			redirect_to links_path
+			redirect_to :back
 	end
 
 		
