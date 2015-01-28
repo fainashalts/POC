@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     member do 
       put "like", to: "links#upvote"
     end
+    resources :comments
   end
 
   
