@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   delete 'users/:id' => 'users#destroy'
 
+  # get 'users/:id/links/:id' => 'links#new', as: :user_links
+
+  # post 'users/:id/links/:id' => 'links#new'
+
   # This allows us to use devise for our routes
   
   devise_scope :user do
@@ -53,6 +57,8 @@ Rails.application.routes.draw do
     end
     resources :comments
   end
+
+
 
   
 
