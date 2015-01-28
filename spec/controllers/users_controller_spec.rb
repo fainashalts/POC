@@ -27,15 +27,18 @@ RSpec.describe UsersController, :type => :controller do
       get :show, id: user
       expect(response).to render_template :show
     end
-
-  #NEW
-  #describe "GET #new" do 
-    #it "assigns the "
-  #end
-    #CREATE
-    #EDIT
-    #UPDATE
-
   end
 
+  #NEW
+  describe "GET #new" do 
+    it "renders the new template" do
+      get :new
+      expect(response).to render_template("new")
+    end
+  end
+
+  #CREATE
+
+    #EDIT
+    #UPDATE
 end
