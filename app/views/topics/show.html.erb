@@ -11,11 +11,12 @@
 			        <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
 					<li><% if current_user.try(:admin?)%><%= link_to 'Delete', topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
 					<!-- Displays the user name of the user who posted the link -->
-			    <li><%= link.user.name %></li>    
-			    <li><%= link_to "Comments", topic_subtopic_link_path(@topic.id, link.subtopic.id, link) %></li>   
+			    <li><%= link.user.name %></li>   
+			    <li><%= link_to "Comments", link_path(link) %></li>   
+			    	
 			    	<!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
 			   	<li>
-			    		<%= link_to like_topic_subtopic_link_path(@topic.id, link.subtopic.id, link), method: :put do %>
+			    		<%= link_to like_link_path(link), method: :put do %>
 			    			
 			    			Upvote
 			    	

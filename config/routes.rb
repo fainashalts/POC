@@ -30,17 +30,30 @@ Rails.application.routes.draw do
     get "signup", to: "devise/registrations#new"
   end
 
-  #topics routes
-  resources :topics do
-    resources :subtopics do
-      resources :links do
-        member do 
-          put "like", to: "links#upvote"
-        end
-        resources :comments
-      end  
+  # scope shallow_prefix: "direct" do
+    resources :topics do
+      resources :subtopics
     end
-  end
+
+
+  # we aren't nesting links/comments inside of topics/subtopics so that we can can access links without having to go through topics and subtopics
+    resources :links do
+      member do 
+        put "like", to: "links#upvote"
+      end
+        
+      resources :comments, except: :index
+    end  
+    
+  # end
+
+  
+  # We're creating these custom routes so that all links can be displayed and new links can be created without needing the topic & subtopic ID that the nested routes require
+  # get 'links' => 'links#index'
+  # get 'links/new' => 'links#new', as: :new_link
+
+  # get '/comments' => 'comments#index'
+  # post 'comments/' => 'comments#create'
   # get 'topics/' => 'topics#index'
   
   # get 'topics/new' => 'topics#new', as: :new_topic

@@ -13,68 +13,70 @@ before_filter :custom_method, :only => [:edit, :destroy]
 			@links = Link.all
 		end
 
-		def show
+	def show
 			@link = Link.find(params[:id])
-		end
+	end
 
-		def new
+	def new
 			@link = Link.new
-		end
+	end
 
-		def create
+	def create
 			
 			# using the current_user helper specifies that each created link will belong to the user who posted it, which makes all of the link's owner's attributes accessible in the link views
 			link = current_user.links.create(link_params)
 
-			if link.save
+		if link.save
 				redirect_to links_path
-			else
+		else
 				render :new
-			end
 		end
+	
+	end
 
-		def edit
+	def edit
 			@link = Link.find(params[:id])
-		end
+	end
 
-		def update
+	def update
 
 			@link = Link.find(params[:id])
 
-			if @link.update_attributes(link_params)
+		if @link.update_attributes(link_params)
 				redirect_to links_path
-			else 
+		else 
 				render "edit"
-			end
 		end
+
+	end
 		
-		def destroy
+	def destroy
 			@link = Link.find(params[:id])
 			@link.destroy
 			redirect_to links_path
-		end
+	end
 
 		
 
-		private
+	private
 
-		def link_params
+	def link_params
 			params.require(:link).permit(:title, :url, :subtopic_id, :user_id, :comment)
-		end
+	end
 
 
 		# custom method for before filter at the top of this page.
-		def custom_method
+	def custom_method
 		  
 		  authenticate_user!
 
-		  if current_user.admin
+	  if current_user.admin
 		     return
-		  else
+	  else
 		     redirect_to root_url
-		  end
+	  end
 
-		end
+	end
 
 
 
