@@ -31,32 +31,36 @@ Rails.application.routes.draw do
   end
 
   #topics routes
-  get 'topics/' => 'topics#index'
-  
-  get 'topics/new' => 'topics#new', as: :new_topic
-  
-  get 'topics/:id' => 'topics#show', as: :topic
-  
-  post 'topics/' => 'topics#create'
-  
-  get 'topics/:id/edit' => 'topics#edit', as: :edit_topic
-  
-  patch 'topics/:id' => 'topics#update'
-
-  delete 'topics/:id' => 'topics#destroy'
-
-  #subtopics routes
-
-  get 'subtopics/:id' => 'subtopics#show', as: :subtopic
-
-  #links routes
-
-  resources :links do
-    member do 
-      put "like", to: "links#upvote"
+  resources :topics do
+    resources :subtopics do
+      resources :links do
+        member do 
+          put "like", to: "links#upvote"
+        end
+        resources :comments
+      end  
     end
-    resources :comments
   end
+  # get 'topics/' => 'topics#index'
+  
+  # get 'topics/new' => 'topics#new', as: :new_topic
+  
+  # get 'topics/:id' => 'topics#show', as: :topic
+  
+  # post 'topics/' => 'topics#create'
+  
+  # get 'topics/:id/edit' => 'topics#edit', as: :edit_topic
+  
+  # patch 'topics/:id' => 'topics#update'
+
+  # delete 'topics/:id' => 'topics#destroy'
+
+  # #subtopics routes
+
+  # get 'subtopics/:id' => 'subtopics#show', as: :subtopic
+
+  # #links routes
+
 
   
 

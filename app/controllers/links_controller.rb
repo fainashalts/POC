@@ -5,7 +5,8 @@ before_filter :custom_method, :only => [:edit, :destroy]
 	def upvote
 		@link = Link.find(params[:id])
 		@link.upvote_by current_user
-		redirect_to links_path
+		# We want to impliment the upvote method in multiple views, redirect_to :back allows us to return to the page that we were on instead of redirecting to a specific place after each upvote
+		redirect_to :back
 	end
 
 	def index

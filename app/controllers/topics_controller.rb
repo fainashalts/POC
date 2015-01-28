@@ -9,6 +9,7 @@ before_filter :custom_method, except: [:index, :show]
 
 	def show
 		@topic = Topic.find(params[:id])
+		@links = Link.all
 	end
 
 	def new
