@@ -11,18 +11,11 @@ before_filter :custom_method, :only => [:edit, :destroy]
 		redirect_to links_path
 	end
 
-	def fetch
-		@link = LinkThumbnailer.generate(params[:url])
-		respond_to do |format|
-			format.json do
-				result.to_json
-			end
-		end
-	end
+	
 
-	def index
-			@links = Link.all
-			@fetch = LinkThumbnailer.generate("http://www.google.com")
+		def index
+				@links = Link.all
+			
 
 		end
 
@@ -36,6 +29,10 @@ before_filter :custom_method, :only => [:edit, :destroy]
 
 		def create
 			@link = Link.new(link_params)
+			@object = LinkThumbnailer.generate(@link.url)
+			# @link.title = object.title
+			# might need to migrate a description column into link table
+			# @link.description = object.description
 
 			if @link.save
 				redirect_to links_path
@@ -65,12 +62,13 @@ before_filter :custom_method, :only => [:edit, :destroy]
 			redirect_to links_path
 		end
 
+
 		
 
 		private
 
 		def link_params
-			params.require(:link).permit(:title, :url)
+			params.require(:link).permit(:title, :url, :description, :image)
 		end
 
 

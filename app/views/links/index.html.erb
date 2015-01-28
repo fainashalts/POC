@@ -1,17 +1,19 @@
 <h1>All Links</h1>
-<%= @fetch.description %>
+
 
 <!-- This will display all of the links in our database, regardless of their user  -->
 <% @links.order(:cached_votes_total => :desc).each do  |link| %>
 
 	<ul>
-		<li><%= link.title %></li>
-		<li><%= link.url %></li>
+		<li><%= link.title %></li>		
+        <li><%= fetch(link.url.to_s).description %></li>
+        <li><%= fetch(link.url.to_s).title %>
+        <li><img src="<%= fetch(link.url.to_s).images.first.src%>"></li>
 
         <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
-        <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
+        <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></li>
 		<!-- If we want to display the user who posted each link, we need to customize some stuff in devise.  As of right now, devise doesn't ask for our name when we sign up, so link.user.name doesn't work. -->
-
+<%end%>
 
 
     	<!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
