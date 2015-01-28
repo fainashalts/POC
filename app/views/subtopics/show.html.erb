@@ -1,0 +1,10 @@
+<h1><%= @subtopic.name %></h1>
+
+<% @subtopic.links.each do |link| %>
+	
+	<div>
+		<h4><%= link.title %></h4>
+		<h5><%= link.url %></h5>
+	</div>
+
+<% end %>

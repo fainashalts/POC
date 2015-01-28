@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-   root to: "links#index"
+   root to: "topics#index"
 
   #sessions routes
   # get '/login' => 'sessions#new'
@@ -44,6 +44,10 @@ Rails.application.routes.draw do
   patch 'topics/:id' => 'topics#update'
 
   delete 'topics/:id' => 'topics#destroy'
+
+  #subtopics routes
+
+  get 'subtopics/:id' => 'subtopics#show', as: :subtopic
 
   #links routes
 

@@ -1,0 +1,21 @@
+<h1><%= @topic.name %></h1>
+
+ <% @topic.subtopics.each do |subtopic| %>
+
+ 	<% subtopic.links.each do |link| %>
+		<h4><%= link.title %></h4>
+		<h5><%= link.url %></h5>
+ 	<% end %>
+
+ <% end %>
+
+	<div class="row col-md-3 pull-right text-right">
+		<h3>Subtopics</h3>
+
+		<% @topic.subtopics.each do |subtopic| %>
+
+			<h4><%= link_to subtopic.name, subtopic_path(subtopic) %></h4>
+
+
+		<% end %>
+	</div>
