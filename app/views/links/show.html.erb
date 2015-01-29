@@ -1,7 +1,7 @@
-<div>
-	<%= @link.title %>
-	<%= @link.url %>
-	<%= link_to "Delete this link", :link, method: :delete, data: {confirm: "Are you sure you want to delete this link?"}%>
+ <div>
+	<h1><%= @link.title %></h1>
+	<h3><%= @link.url %></h3>
+	<%= link_to "Delete this link", links_path, method: :delete, data: {confirm: "Are you sure you want to delete this link?"}%>
 </div>	
 
 <h2>Comments</h2>

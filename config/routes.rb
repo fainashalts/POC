@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-   root to: "links#index"
+   root to: "topics#index"
 
   #sessions routes
   # get '/login' => 'sessions#new'
@@ -34,29 +34,49 @@ Rails.application.routes.draw do
     get "signup", to: "devise/registrations#new"
   end
 
-  #topics routes
-  get 'topics/' => 'topics#index'
-  
-  get 'topics/new' => 'topics#new', as: :new_topic
-  
-  get 'topics/:id' => 'topics#show', as: :topic
-  
-  post 'topics/' => 'topics#create'
-  
-  get 'topics/:id/edit' => 'topics#edit', as: :edit_topic
-  
-  patch 'topics/:id' => 'topics#update'
 
-  delete 'topics/:id' => 'topics#destroy'
-
-  #links routes
-
-  resources :links do
-    member do 
-      put "like", to: "links#upvote"
+    resources :topics do
+      resources :subtopics
     end
-    resources :comments
-  end
+
+
+  # we aren't nesting links/comments inside of topics/subtopics so that we can can access links without having to go through topics and subtopics
+    resources :links do
+      member do 
+        put "like", to: "links#upvote"
+      end 
+      resources :comments, except: :index
+    end  
+    
+  # end
+
+  
+  # We're creating these custom routes so that all links can be displayed and new links can be created without needing the topic & subtopic ID that the nested routes require
+  # get 'links' => 'links#index'
+  # get 'links/new' => 'links#new', as: :new_link
+
+  # get '/comments' => 'comments#index'
+  # post 'comments/' => 'comments#create'
+  # get 'topics/' => 'topics#index'
+  
+  # get 'topics/new' => 'topics#new', as: :new_topic
+  
+  # get 'topics/:id' => 'topics#show', as: :topic
+  
+  # post 'topics/' => 'topics#create'
+  
+  # get 'topics/:id/edit' => 'topics#edit', as: :edit_topic
+  
+  # patch 'topics/:id' => 'topics#update'
+
+  # delete 'topics/:id' => 'topics#destroy'
+
+  # #subtopics routes
+
+  # get 'subtopics/:id' => 'subtopics#show', as: :subtopic
+
+  # #links routes
+
 
 
 

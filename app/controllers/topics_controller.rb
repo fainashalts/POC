@@ -9,6 +9,7 @@ before_filter :custom_method, except: [:index, :show]
 
 	def show
 		@topic = Topic.find(params[:id])
+		@links = Link.all
 	end
 
 	def new
@@ -43,7 +44,7 @@ before_filter :custom_method, except: [:index, :show]
 	def destroy
 		@topic = Topic.find(params[:id])
 		@topic.destroy
-		redirect_to topics_path
+		redirect_to :back
 	end
 
 	
