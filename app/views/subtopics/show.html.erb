@@ -3,20 +3,21 @@
 <% @subtopic.links.each do |link| %>
 	
 	<ul>
-		<li><h4><%= link.title %></h4></li>
-    <li><%= link.url %></li>
-    <li><%= link.subtopic.name %></li>
-    <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
-    <li><%= link_to "Comments", link_path(link) %> || (<%= link.comments.count %>)</li>   
-    <li>
-        <%= link_to like_link_path(link), method: :put do %>
+		<li><h4><%= fetch(link.url.to_s).title %></h4></li>
+        <li><%= fetch(link.url.to_s).description %></li>
+        <li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src %>"></li>
+        <li><%= link.subtopic.name %></li>
+        <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
+        <li><%= link_to "Comments", link_path(link) %> || (<%= link.comments.count %>)</li>   
+        <li>
+            <%= link_to like_link_path(link), method: :put do %>
+              
+              Upvote
           
-          Upvote
-      
-          <%= link.get_upvotes.size %>
+              <%= link.get_upvotes.size %>
 
-        <% end %> 
-    </li>
+            <% end %> 
+        </li>
 	</ul>
 
 <% end %>

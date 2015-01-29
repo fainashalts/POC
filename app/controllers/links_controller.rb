@@ -1,3 +1,5 @@
+require 'link_thumbnailer'
+
 class LinksController < ApplicationController
 # before filter so that only admins can edit and destroy links; might want to allow the user who added a link to edit it (say, if they typed something incorrectly). Something we as a group should decide.
 before_filter :admin, :only => [:edit, :destroy]	
@@ -11,13 +13,13 @@ before_action :authenticate_user!, except: [:index, :show]
 		redirect_to :back
 	end
 
+
 	def index
 			@user = current_user
 
 			@link = Link.new
-			@links = Link.all
-			
-		end
+			@links = Link.all		
+	end
 
 	def show
 			@link = Link.find(params[:id])
@@ -29,13 +31,15 @@ before_action :authenticate_user!, except: [:index, :show]
 			@link = Link.new
 	end
 
+
 	def create
-			
+		@link = current_user.links.create(link_params)
+		@object = LinkThumbnailer.generate(@link.url)
+			# @link.title = object.title
+			# might need to migrate a description column into link table
+			# @link.description = object.description
 
-			# using the current_user helper specifies that each created link will belong to the user who posted it, which makes all of the link's owner's attributes accessible in the link views
-			link = current_user.links.create(link_params)
-
-		if link.save
+		if @link.save
 				redirect_to links_path
 		else
 				render :new
@@ -65,13 +69,15 @@ before_action :authenticate_user!, except: [:index, :show]
 			redirect_to :back
 	end
 
+
 		
 
 	private
 
 	def link_params
-			params.require(:link).permit(:title, :url, :subtopic_id, :user_id, :comment)
+			params.require(:link).permit(:title, :url, :subtopic_id, :user_id, :comment, :description, :image)
 	end
+
 
 
 		# custom method for before filter at the top of this page.
