@@ -58,6 +58,9 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  namespace :api do
+      resources :links, only: [:index, :create, :show], defaults: {format: "json"}
+  end
 
 
   
