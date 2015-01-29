@@ -78,6 +78,9 @@ Rails.application.routes.draw do
   # #links routes
 
 
+  namespace :api do
+      resources :links, only: [:index, :create, :show], defaults: {format: "json"}
+  end
 
 
   
