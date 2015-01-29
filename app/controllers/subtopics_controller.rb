@@ -1,6 +1,8 @@
 class SubtopicsController < ApplicationController
 # before filter so that only administrators can add, update, or delete subtopics
-before_filter :custom_method, except: [:index, :show]
+before_action :authenticate_user!, except: [:index, :show]
+before_filter :admin, except: [:index, :show]
+
 
 def index
 		@subtopics = Subtopic.all
@@ -54,17 +56,18 @@ def index
 	end
 
 	# custom method for before_filter at top of page
-	def custom_method
-		  
-		  authenticate_user!
+	def admin
+		authenticate_user!
+		 if current_user.admin
+		   return
+		 else
+		    redirect_to root_url
+		 end
+	end
 
-		  if current_user.admin
-		     return
-		  else
-		     redirect_to root_url
-		  end
-
-		end
+	def require_login
+		authenticate_user!
+	end
 		
 end
 

@@ -1,6 +1,8 @@
 class LinksController < ApplicationController
 # before filter so that only admins can edit and destroy links; might want to allow the user who added a link to edit it (say, if they typed something incorrectly). Something we as a group should decide.
-before_filter :custom_method, :only => [:edit, :destroy]	
+before_filter :admin, :only => [:edit, :destroy]	
+before_action :authenticate_user!, except: [:index, :show]
+
 	
 	def upvote
 		@link = Link.find(params[:id])
@@ -73,18 +75,14 @@ before_filter :custom_method, :only => [:edit, :destroy]
 
 
 		# custom method for before filter at the top of this page.
-	def custom_method
-		  
-		  authenticate_user!
-
+	def admin
+		authenticate_user!
 	  if current_user.admin
-		     return
+		  return
 	  else
-		     redirect_to root_url
+		  redirect_to root_url
 	  end
-
 	end
-
 
 
 end
