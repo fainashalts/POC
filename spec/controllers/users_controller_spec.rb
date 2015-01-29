@@ -12,20 +12,31 @@ RSpec.describe UsersController, :type => :controller do
       expect(response).to render_template("index")
     end 
   end
+ #SHOW
+  describe "GET #show" do
+    it "assigns the requested user to @user" do
+      user = FactoryGirl.create(:user)
+      get :show, id: user
+      expect(assigns(:user)).to eq(user)
+    end
 
-  # describe "GET #show" do
-  #   it "assigns the requested user to @user" do
-  #     user = FactoryGirl.build(:a_user)
-  #     get :show, id: user
-  #     assigns(:user).should eq(user)
-  #   end
+    it "renders the #show view" do
+      user = FactoryGirl.create(:user)
+      get :show, id: user
+      expect(response).to render_template :show
+    end
+  end
 
-  #   it "renders the #show view" do
-  #     user = FactoryGirl.build(:a_user)
-  #     get :show, id: user
-  #     response.should render_template :show
-  #   end
+  #NEW
+  describe "GET #new" do 
+    it "renders the new template" do
+      get :new
+      expect(response).to render_template("new")
+    end
+  end
 
-  # end
+  #CREATE
 
+    #EDIT
+    #UPDATE
 end
