@@ -1,30 +1,37 @@
 <h1>All Links</h1>
 
 
+
 <!-- This will display all of the links in our database, regardless of their user  -->
 <% @links.order(:cached_votes_total => :desc).each do  |link| %>
 
-  <ul>
-    <li><%= link.title %></li>
-    <li><%= link.url %></li>
-        <li><%= link.try(:subtopic).try(:name) %></li>
-        <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
-        <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
-    <!-- Displays the user name of the user who posted the link -->
-       
-
-
-      <!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
-      <li>
-        <%= link_to like_link_path(link), method: :put do %>
+        <ul>
+          <li><%= link.title %></li>
+          <li><%= link.url %></li>
+          <li><%= link.try(:subtopic).try(:name) %></li>
           
-          Upvote
-      
-          <%= link.get_upvotes.size %>
+          <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
+          <!-- we need a topic ID to use topic path- the confusing looking paramater being passed into topic_path is calling the topic ID through a link's subtopic -->
+          <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
+          
+          <!-- Displays the user name of the user who posted the link -->
+          <li><%= link.user.name %></li>
+          
+          <li><%= link_to "Comments", link_path(link) %></li>   
+            
+          <!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
 
-        <% end %> 
-      </li>
-  </ul>
+          <li>
+              <%= link_to like_link_path(link), method: :put do %>
+                
+                Upvote
+            
+                <%= link.get_upvotes.size %>
+
+              <% end %> 
+          </li>
+        </ul> 
+
 
 <% end %>
 

@@ -1,0 +1,52 @@
+<h1><%= @topic.name %></h1>
+
+	 
+<div class="row">
+	
+	<div class="col-md-8">
+		 <% @links.order(:cached_votes_total => :desc).each do |link| %>
+
+		<!--  	We want to display the links that belong to each of @topic's subtopics, so we put @links = Link.all in the show method of the topics controller, and we're using this conditional statement to show only the links that belong to a subtopic which belongs to the current topic page -->
+		 		<% if link.subtopic.topic_id == @topic.id %>
+						<ul>
+							<li><%= link.title %></li>
+							<li><%= link.url %></li>
+					    <li><%= link.try(:subtopic).try(:name) %></li>
+					        <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
+							<li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
+							<!-- Displays the user name of the user who posted the link -->
+					    <li><%= link.user.name %></li>   
+					    <li><%= link_to "Comments", link_path(link) %> || (<%= link.comments.count %>)</li>   
+					    	
+					    	<!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
+					   	<li>
+					    		<%= link_to like_link_path(link), method: :put do %>
+					    			
+					    			Upvote
+					    	
+					    			<%= link.get_upvotes.size %>
+
+					    		<% end %> 
+					    </li>
+						</ul> 
+		 		<% end %>
+
+
+		 <% end %>
+	</div>
+
+		<div class="col-md-4 text-right navbar-fixed-right">
+		<h3>Subtopics</h3>
+
+		<% @topic.subtopics.each do |subtopic| %>
+
+			<h4><%= link_to subtopic.name, topic_subtopic_path(@topic.id, subtopic) %></h4>
+
+
+		<% end %>
+	</div>
+
+
+</div>
+
+
