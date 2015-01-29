@@ -7,7 +7,9 @@
 
         <ul>
           <li><%= link.title %></li>
-          <li><%= link.url %></li>
+          <li><%= fetch(link.url.to_s).description %></li>
+          <li><%= fetch(link.url.to_s).title %>
+          <li><img src="<%= fetch(link.url.to_s).images.first.src%>"></li>
           <li><%= link.try(:subtopic).try(:name) %></li>
           
           <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
@@ -31,7 +33,6 @@
               <% end %> 
           </li>
         </ul> 
-
 
 <% end %>
 

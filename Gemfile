@@ -38,6 +38,9 @@ gem 'factory_girl_rails'
 # Add Devise
 gem 'devise'
 
+# gem to allow us to show thumbnails of links submitted by users
+gem 'link_thumbnailer'
+
 gem 'acts_as_votable', '~> 0.10.0'
 
 group :development, :test do
