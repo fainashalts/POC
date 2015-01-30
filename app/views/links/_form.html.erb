@@ -1,14 +1,11 @@
 <!-- By adding @user to the form_for, each link will include a specific user id -->
 <%= form_for @link do |f| %>
 
-	<div>
-		<%= f.label :title %>
-		<%= f.text_field :title %>
-	</div>
-
+	<p>Please submit your link in the proper format!<p>
+	<p>For Example: http://www.google.com</p>
 	<div>
 		<%= f.label :url %>
-		<%= f.text_field :url %>
+		<%= f.url_field :url %>
 	</div>
 
 	<div>
