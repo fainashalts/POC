@@ -10,6 +10,7 @@ def index
 
 	def show
 		@subtopic = Subtopic.find(params[:id])
+		@link = Link.new
 	end
 
 	def new
@@ -17,7 +18,7 @@ def index
 	end
 
 	def create
-		@subtopic = Subtopic.new (link_params)
+		@subtopic = Subtopic.new(subtopic_params)
 
 		if @subtopic.save
 			redirect_to subtopics_path
