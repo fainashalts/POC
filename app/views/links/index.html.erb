@@ -4,31 +4,43 @@
 
 d3.select("body")
       .append("svg")
-      .attr("width", "300px")
-      .attr("height", "300px");
+      .attr("width", "100%")
+      .attr("height", "100%");
 
-d3.json("http://partyoncode.herokuapp.com/api/topics",
+d3.json("http://localhost:3000/api/topics",
       function(error, topics) {
             if (error) return console.warn(error);
 
-            for(var i = 0; i < topics.items.length; i++){
+
+            for(var i = 0; i < topics.length; i++){
+              console.log(topics[i].subtopics)
               d3.select("svg")
                 .append("circle")
                 .attr({
-                  cx: "25%",
-                  cy: "25%",
-                  r: 5,
+                  cx: 10*(i+1),
+                  cy: 10*(i+1),
+                  r: 5*(topics[i].subtopics.length)
                 })
+            }
+
+            // for(var i = 0; i < topics.subtopics.length; i++){
+            //   d3.select("svg")
+            //     .append("circle")
+            //     .attr({
+            //       cx: "25%",
+            //       cy: "25%",
+            //       r: 5,
+            //     })
                   
 
-                  name = routes.items[i].display_name;
-                  id = routes.items[i].id;
+                  // name = routes.items[i].display_name;
+                  // id = routes.items[i].id;
 
-                  getRoutes(name, id);
+                  // getRoutes(name, id);
                   
-            };
+            // };
 
-            console.log(routes);
+
       }
 );
 
