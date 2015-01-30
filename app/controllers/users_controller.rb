@@ -6,7 +6,7 @@ before_filter :correct_user, only: [:edit, :update, :destroy]
 
 
 	# basic CRUD functionality
-	def index
+		def index
 			@users = User.all
 		end
 

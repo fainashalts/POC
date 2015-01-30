@@ -47,6 +47,14 @@ Rails.application.routes.draw do
       end 
       resources :comments, except: :index
     end  
+
+    namespace :api do
+        resources :links, only: [:index, :create, :show], defaults: {format: "json"}
+        resources :topics, only: [:index, :create, :show], defaults: {format: "json"}
+        resources :subtopics, except: [:topic_id], defaults: {format: "json"}
+    end
+
+
     
   # end
 
@@ -78,9 +86,6 @@ Rails.application.routes.draw do
   # #links routes
 
 
-  namespace :api do
-      resources :links, only: [:index, :create, :show], defaults: {format: "json"}
-  end
 
 
   
