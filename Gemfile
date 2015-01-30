@@ -29,6 +29,9 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.9'
 
+#d3
+gem 'd3js-rails', '~> 3.1.6'
+
 # Add Bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
 

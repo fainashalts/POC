@@ -1,5 +1,38 @@
 <h1>All Links</h1>
 
+<script>
+
+d3.select("body")
+      .append("svg")
+      .attr("width", "300px")
+      .attr("height", "300px");
+
+d3.json("http://partyoncode.herokuapp.com/api/topics",
+      function(error, topics) {
+            if (error) return console.warn(error);
+
+            for(var i = 0; i < topics.items.length; i++){
+              d3.select("svg")
+                .append("circle")
+                .attr({
+                  cx: "25%",
+                  cy: "25%",
+                  r: 5,
+                })
+                  
+
+                  name = routes.items[i].display_name;
+                  id = routes.items[i].id;
+
+                  getRoutes(name, id);
+                  
+            };
+
+            console.log(routes);
+      }
+);
+
+</script>
 
 
 <!-- This will display all of the links in our database, regardless of their user  -->

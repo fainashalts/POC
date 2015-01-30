@@ -37,6 +37,7 @@ module Api
       head 204
     end
 
+
     private 
     def topic_params
       params.require(:topic).permit(:name)
