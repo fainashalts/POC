@@ -40,7 +40,7 @@ before_action :authenticate_user!, except: [:index, :show]
 			# @link.description = object.description
 
 		if @link.save
-				redirect_to links_path
+				redirect_to :back
 		else
 				render :new
 		end
