@@ -1,0 +1,78 @@
+<script>
+
+d3.json("http://localhost:3000/api/topics",
+      function(error, topics) {
+            if (error) return console.warn(error);
+
+              for(var i = 0; i < topics[0].subtopics.length; i++){
+                d3.select("#first-subtopic")
+                  .append("svg")
+                  .attr({
+                    "height": "30%",
+                    "width": "30%"
+                  })
+                  .append("circle")
+                  .style({
+                    "color": "blue"
+                  })
+                  .attr({
+                    cx: (Math.floor((Math.random() * 100) + 1)),
+                    cy: (Math.floor((Math.random() * 100) + 1)),
+                    r: 5*(topics[0].subtopics[i].link_count),
+                  });
+              };
+
+              for(var i = 0; i < topics[0].subtopics.length; i++){
+                d3.select("#second-subtopic")
+                  .append("svg")
+                  .attr({
+                    "height": "30%",
+                    "width": "30%"
+                  })
+                  .append("circle")
+                  .attr({
+                    cx: (Math.floor((Math.random() * 100) + 1)),
+                    cy: (Math.floor((Math.random() * 100) + 1)),
+                    r: 5*(topics[1].subtopics[i].link_count)
+                  });
+              };
+
+              for(var i = 0; i < topics[0].subtopics.length; i++){
+                d3.select("#third-subtopic")
+                  .append("svg")
+                  .attr({
+                    "height": "30%",
+                    "width": "30%"
+                  })
+                  .append("circle")
+                  .attr({
+                    cx: (Math.floor((Math.random() * 100) + 1)),
+                    cy: (Math.floor((Math.random() * 100) + 1)),
+                    r: 5*(topics[2].subtopics[i].link_count)
+                  });
+                };
+
+              for(var i = 0; i < topics[0].subtopics.length; i++){
+                d3.select("#fourth-subtopic")
+                  .append("svg")
+                  .attr({
+                    "height": "30%",
+                    "width": "30%"
+                  })
+                  .append("circle")
+                  .attr({
+                    cx: (Math.floor((Math.random() * 100) + 1)),
+                    cy: (Math.floor((Math.random() * 100) + 1)),
+                    r: 5*(topics[3].subtopics[i].link_count)
+                  });
+                };
+      }
+);
+ </script>
+
+
+
+ <div id="first-subtopic" class="d3"></div>
+ <div id="second-subtopic" class="d3"></div>
+ <div id="third-subtopic" class="d3"></div>
+ <div id="fourth-subtopic" class="d3"></div>

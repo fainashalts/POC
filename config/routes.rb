@@ -36,8 +36,10 @@ Rails.application.routes.draw do
 
 
     resources :topics do
-      resources :subtopics
+      resources :subtopics, except: :index
     end
+
+    get 'subtopics' => 'subtopics#index'
 
 
   # we aren't nesting links/comments inside of topics/subtopics so that we can can access links without having to go through topics and subtopics
