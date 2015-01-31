@@ -11,6 +11,7 @@ before_filter :admin, except: [:index, :show]
 	def show
 		@topic = Topic.find(params[:id])
 		@links = Link.all
+		@link = Link.new
 	end
 
 	def new
@@ -18,7 +19,7 @@ before_filter :admin, except: [:index, :show]
 	end
 
 	def create
-		@topic = Topic.new (link_params)
+		@topic = Topic.new(topic_params)
 
 		if @topic.save
 			redirect_to topics_path
