@@ -33,16 +33,26 @@ before_action :authenticate_user!, except: [:index, :show]
 
 
 	def create
-		@link = current_user.links.create(link_params)
-		@object = LinkThumbnailer.generate(@link.url)
+		@link = current_user.links.new(link_params)
+		begin
+			@object = LinkThumbnailer.generate(@link.url)
 			# @link.title = object.title
 			# might need to migrate a description column into link table
 			# @link.description = object.description
 
-		if @link.save
-				redirect_to :back
+		# if @object
+		# 	@link.save
+		# else
+		# 	render :new
+		# end
+		rescue
+			redirect_to :back
+			# render :text => "Sorry, that link is invalid! Please hit your browser's back button to return to Party On Code and try again!"
+			puts "No"
 		else
-				render :new
+
+			@link.save
+					redirect_to :back
 		end
 	
 	end
@@ -89,6 +99,7 @@ before_action :authenticate_user!, except: [:index, :show]
 		  redirect_to root_url
 	  end
 	end
+
 
 
 end
