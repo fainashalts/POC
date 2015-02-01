@@ -34,21 +34,14 @@ before_action :authenticate_user!, except: [:index, :show]
 
 	def create
 		@link = current_user.links.new(link_params)
+		# had to add a begin-rescue block here to ensure that a url that throws an error when fetched by the LinkThumbnailer gem does not break the site; with this block in place, an error will be rescued and the user will be sent back to the page they were on before. Unfortunately, I was unable to get the puts message to show on the screen, and am unsure why. I was able to render text, but this put the user on a new page and didn't seem ideal from a UX perspective...
 		begin
 			@object = LinkThumbnailer.generate(@link.url)
-			# @link.title = object.title
-			# might need to migrate a description column into link table
-			# @link.description = object.description
-
-		# if @object
-		# 	@link.save
-		# else
-		# 	render :new
-		# end
+		
 		rescue
 			redirect_to :back
 			# render :text => "Sorry, that link is invalid! Please hit your browser's back button to return to Party On Code and try again!"
-			puts "No"
+			# puts "This link is invalid. Please try again!"
 		else
 
 			@link.save
