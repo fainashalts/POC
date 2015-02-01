@@ -4,3 +4,4 @@ FactoryGirl.define do
     url "www.google.com"
   end
 end
+ 

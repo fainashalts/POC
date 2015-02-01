@@ -17,4 +17,4 @@ describe "Links API", :type => :request do
     expect(response).to have_http_status 201
     expect(response.location).to eq("http://www.example.com/api/links/#{link['id']}")
   end
-end
+end 
