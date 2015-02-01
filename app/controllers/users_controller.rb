@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 # added a before filter here to ensure that users can only edit and destroy their own profiles(unless they are an administrator)
 # before_action :authenticate_user!
-before_action :authernticate_user!	
+before_action :authenticate_user!	
 before_filter :correct_user, only: [:edit, :update, :destroy]
 
 
