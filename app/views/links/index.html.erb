@@ -8,6 +8,7 @@
         <ul>
           <li><%= fetch(link.url.to_s).description %></li>
           <li><%= fetch(link.url.to_s).title %>
+          <li><a href="<%=link.url %>">Party On Code</a></li>
           <li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src%>"></li>
           <li><%= link.try(:subtopic).try(:name) %></li>
           
