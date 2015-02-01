@@ -1,78 +1,55 @@
+<!-- If you open up your console and inspect the list of arrays before the error, you should see that the object nested within each array has an x, y, and r attribute of NAN.  If we can figure out how to get these attributes to become values, we'll be in the money.  I'll leave comments below to try to help you out.  There's a sort of path that the code follows (as far as I understand it, at least) that doesn't really read up to down, so I will number the comments- read them in order of number rather than from top to bottom -->
 <script>
 
-d3.json("http://localhost:3000/api/topics",
-      function(error, topics) {
-            if (error) return console.warn(error);
 
-              for(var i = 0; i < topics[0].subtopics.length; i++){
-                d3.select("#first-subtopic")
-                  .append("svg")
-                  .attr({
-                    "height": "30%",
-                    "width": "30%"
-                  })
-                  .append("circle")
-                  .style({
-                    "color": "blue"
-                  })
-                  .attr({
-                    cx: (Math.floor((Math.random() * 100) + 1)),
-                    cy: (Math.floor((Math.random() * 100) + 1)),
-                    r: 5*(topics[0].subtopics[i].link_count),
-                  });
-              };
+var width = 800,
+    height = 600;
 
-              for(var i = 0; i < topics[0].subtopics.length; i++){
-                d3.select("#second-subtopic")
-                  .append("svg")
-                  .attr({
-                    "height": "30%",
-                    "width": "30%"
-                  })
-                  .append("circle")
-                  .attr({
-                    cx: (Math.floor((Math.random() * 100) + 1)),
-                    cy: (Math.floor((Math.random() * 100) + 1)),
-                    r: 5*(topics[1].subtopics[i].link_count)
-                  });
-              };
 
-              for(var i = 0; i < topics[0].subtopics.length; i++){
-                d3.select("#third-subtopic")
-                  .append("svg")
-                  .attr({
-                    "height": "30%",
-                    "width": "30%"
-                  })
-                  .append("circle")
-                  .attr({
-                    cx: (Math.floor((Math.random() * 100) + 1)),
-                    cy: (Math.floor((Math.random() * 100) + 1)),
-                    r: 5*(topics[2].subtopics[i].link_count)
-                  });
-                };
+// 3) I'm pretty sure that either one of the following two blocks of code are the reason why the X, Y and R values show up as NaN.  I think that the "'transform', 'translate(50, 50)'" has something to do with assigning the X and Y coordinates, and I'm thinking that maybe the way that this block is written is trying to assign the X and Y coordinates to a part of our JSON that is nested farther than this code is trying to reach.  There's a really high chance that I'm completely wrong, but this was the avenue that I was going down before I left for dinner.
+var canvas = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                  .attr("transform", "translate(50, 50)")
 
-              for(var i = 0; i < topics[0].subtopics.length; i++){
-                d3.select("#fourth-subtopic")
-                  .append("svg")
-                  .attr({
-                    "height": "30%",
-                    "width": "30%"
-                  })
-                  .append("circle")
-                  .attr({
-                    cx: (Math.floor((Math.random() * 100) + 1)),
-                    cy: (Math.floor((Math.random() * 100) + 1)),
-                    r: 5*(topics[3].subtopics[i].link_count)
-                  });
-                };
-      }
-);
+var pack = d3.layout.pack()
+              .size([width, height - 50 ])
+              .padding(10)
+
+
+// 1) the data paramater in the function is the JSON in our subtopics API.  I'm using subtopics because the layout was somewhat closer to the tutorial I was following
+d3.json("http://localhost:3000/api/subtopics", function(data) {
+
+  // 2) the following 8 lines push the data from each subtopic object in our JSON into the nodes variable- This is where the X, Y and R are assigned to each object.  Like I mentioned before, the X, Y and R attributes are all NaN
+
+  var nodes = []
+
+  for(var i=0; i < data.length; i++){
+    nodes.push(pack.nodes(data[i]));
+  }
+
+  console.log(nodes)
+
+  // 4)  This is the block of code that's throwing the error- the last .attr in the node variable isn't returning a value for d[i].x and d[i].y because both of those values are NaN and the same is true for the "d[i].r" in the first .attr of node.append("circle")
+
+  var node = canvas.selectAll(".node")
+              .data(nodes)
+              .enter()
+              .append("g")
+                .attr("class", "node")
+                .attr("transform", function (d, i) {return "translate(" + d[i].x + ", " + d[i].y + ")"});
+
+  node.append("circle")
+        .attr("r", function (d, i) {return d[i].r; })
+        .attr("fill", "steelblue")
+        .attr("opacity", 0.25)
+        .attr("stroke", "#ADADAD")
+        .attr("stroke-width", "2");
+});
+
  </script>
 
 
 
- <div id="first-subtopic" class="d3"></div>
- <div id="second-subtopic" class="d3"></div>
- <div id="third-subtopic" class="d3"></div>
- <div id="fourth-subtopic" class="d3"></div>
+
