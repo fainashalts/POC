@@ -1,6 +1,6 @@
 <h1><%= @subtopic.name %></h1>
 
-<% @subtopic.links.each do |link| %>
+<% @subtopic.links.order(:cached_votes_total => :desc).each do |link| %>
 	
 	<ul>
 		<li><h4><%= fetch(link.url.to_s).title %></h4></li>
