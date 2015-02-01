@@ -25,7 +25,6 @@
 					</ul>
 			<% end %>
 		</nav>	
-		<gcse:search id="smallersearch"></gcse:search>
 	</div>
 
 		<p class="notice"><%= notice %></p>
@@ -36,18 +35,7 @@
 
 
 <%= yield %>
-<script>
-  (function() {
-    var cx = '005438863460059713501:npfgso68uoq';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
+
 
 </body>
 </html>
