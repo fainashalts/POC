@@ -1,5 +1,6 @@
 class Topic < ActiveRecord::Base
 	has_many :subtopics
+  
 
   def description 
     self.name

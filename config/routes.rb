@@ -39,6 +39,8 @@ Rails.application.routes.draw do
       resources :subtopics
     end
 
+  get "/subtopics/new" => "subtopics#new", as: :subtopics
+  post "/subtopics/new" => "subtopics#create"
 
   # we aren't nesting links/comments inside of topics/subtopics so that we can can access links without having to go through topics and subtopics
     resources :links do
