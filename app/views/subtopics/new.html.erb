@@ -1,0 +1,17 @@
+
+<%= form_for @subtopic do |f| %>
+  
+  <div>
+    <%= f.label :topic_id, "Pick a Topic" %>
+    <%= f.collection_select(:topic_id, Topic.all, :id, :name) %>
+  </div>
+
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  
+  <div>
+    <%= f.submit "Add Subtopic!" %>
+  </div> 
+<%end%>
