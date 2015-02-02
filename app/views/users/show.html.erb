@@ -20,7 +20,7 @@
 	<% @user.find_voted_items.each do |link| %>
 
 		<ul class="list-unstyled">
-			<li><a href="<%=link.url %>"><%= link.url %></a></li>
+			<li><a href="<%=link.url %>"><%= fetch(link.url.to_s).title %></a></li>
 		</ul>
 
 
