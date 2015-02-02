@@ -10,6 +10,8 @@ before_filter :admin, except: [:index, :show]
 
 	def show
 		@topic = Topic.find(params[:id])
+		@topics = Topic.all
+		@subtopics = Subtopic.all
 		@links = Link.all
 		@link = Link.new
 	end

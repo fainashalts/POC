@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       resources :subtopics
     end
 
+  get "/subtopics/:id" => 'subtopics#show', as: :subtopic
   get "/subtopics/new" => "subtopics#new", as: :subtopics
   post "/subtopics/new" => "subtopics#create"
 

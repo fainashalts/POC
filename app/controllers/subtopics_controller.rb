@@ -9,8 +9,10 @@ def index
 	end
 
 	def show
+		@subtopics = Subtopic.all
 		@subtopic = Subtopic.find(params[:id])
 		@link = Link.new
+		@topics = Topic.all
 	end
 
 	def new
