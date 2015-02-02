@@ -1,7 +1,76 @@
-<h1>All Topics</h1>
+  <div class="col-md-11 main">
+    <h1 class="col-md-7 text-center subtitle">What are you here to learn about?</h1>
 
-<% @topics.each do |topic| %>
+    <div class="col-md-12 main nav-style">
+      <% @topics.each do |topic| %>
 
-	<h3><%= link_to topic.name, topic_path(topic)  %></h3>
+        <div class="col-md-2">
+          <button class="btn  dropdown-toggle nav-style" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"><%= link_to topic.name, topic_path(topic) %>
+          <span class="caret"></span>
+          </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <% topic.subtopics.each do |subtopic| %>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= link_to subtopic.name, subtopic_path(subtopic) %></a></li>
+              <% end %>
+            </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-<% end %>
+
+  <div class="col-md-8 text-left party-function row">
+
+    <h2><span class="red">for</span><span class="white">( </span><span class="blue"> var </span><span class="white"> = </span><span class="purple">0</span><span class="white">; i</span><span class="red"> &lt; </span><span class="white"> ∞; i</span><span class="red"> ++</span><span class="white">) {<span></span></h2>
+
+    <img src="http://www.sixstringtheories.com/wp-content/uploads/2012/04/mocha-dad-friday-night-party-on-twitter.jpg" class="party-img inline-block">
+
+    <h2 class="inline-block white"><span class="red">return </span>Party Time;</h2>
+
+    <h2 class="col-md-5 white">}</h2>
+
+  </div>
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-2 text-right link-list sidebar"></div>
+
+  <script>
+  $(function(){
+
+    $.getJSON("http://localhost:3000/api/subtopics", function(response, status, jqXHR){
+
+      console.log(response);
+      
+      function compare(a,b) {
+        if (a.links.count > b.links.count)
+           return -1;
+        if (a.links.count < b.links.count)
+          return 1;
+        return 0;
+      }
+
+      response.sort(compare);
+
+      console.log(response);
+
+      $(".link-list").html(
+          "<h3 class='oswald'>Popular Subtopics</h3></br>" +
+          "<ul class='list-unstyled'>" +
+            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[0].id + "'>" + response[0].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[1].id + "'>" + response[1].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[2].id + "'>" + response[2].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[3].id + "'>" + response[3].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[4].id + "'>" + response[4].name + "</a></h4></li>" +
+          "</ul>"
+
+      );
+
+    });
+
+  });
+
+  </script>
+
+
+
