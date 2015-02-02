@@ -1,75 +1,86 @@
-<h1><%= @topic.name %></h1>
+<h1 class=" col-md-6 text-center subtitle row"><%= @topic.name %></h1></br>
 
-	 
-<div class="row">
-	
-	<div class="col-md-8">
-		 <% @links.order(:cached_votes_total => :desc).each do |link| %>
+  <% if current_user %>
 
-		<!--  	We want to display the links that belong to each of @topic's subtopics, so we put @links = Link.all in the show method of the topics controller, and we're using this conditional statement to show only the links that belong to a subtopic which belongs to the current topic page -->
-		 		<% if link.subtopic.topic_id == @topic.id %>
-						<ul>
-							<li><%= fetch(link.url.to_s).title %></li>
-							<li><%= fetch(link.url.to_s).description %></li>
-							<li><a href="<%=link.url %>">Party On Code</a></li>
-							<li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src %>"></li>
-					    <li><%= link.try(:subtopic).try(:name) %></li>
-					        <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
-							<li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
-							<!-- Displays the user name of the user who posted the link -->
-					    <li><%= link.user.name %></li>   
-					    <li><%= link_to "Comments", link_path(link) %> || (<%= link.comments.count %>)</li>   
-					    	
-					    	<!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
-					   	<li>
-					    		<%= link_to like_link_path(link), method: :put do %>
-					    			
-					    			Upvote
-					    	
-					    			<%= link.get_upvotes.size %>
-
-					    		<% end %> 
-					    </li>
-						</ul> 
-		 		<% end %>
+    <div class="modal fade" id="add-link-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add a New Link!</h4>
+            </div>
+            <div class="modal-body">
+              <%= render 'links/form', object: @link %>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-		 <% end %>
-	</div>
-	
-	<% if current_user %>
-
-	  <div class="modal fade" id="add-link-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	      <div class="modal-dialog">
-	        <div class="modal-content">
-	          <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	            <h4 class="modal-title" id="myModalLabel">Add a New Link!</h4>
-	          </div>
-	          <div class="modal-body">
-	            <%= render 'links/form', object: @link %>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-
-	    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-link-modal">Add a Link</button>
+      <div class="col-md-6 text-center">
+        <button type="button" class="btn btn-primary btn-lg text-center" data-toggle="modal" data-target="#add-link-modal">Add a Link</button>
+      </div>
 
 
-	<% end %>
+  <% end %>
 
-		<div class="col-md-4 text-right navbar-fixed-right">
-		<h3>Subtopics</h3>
+  <div class="col-md-6 text-left main-list">
+   <% @links.order(:cached_votes_total => :desc).each do |link| %>
 
-		<% @topic.subtopics.each do |subtopic| %>
+  <!--  	We want to display the links that belong to each of @topic's subtopics, so we put @links = Link.all in the show method of the topics controller, and we're using this conditional statement to show only the links that belong to a subtopic which belongs to the current topic page -->
+   		<% if link.subtopic.topic_id == @topic.id %>
+  				<ul class="list-unstyled">
+  					<li><h4><%= fetch(link.url.to_s).title %></h4></li>
+  					<li><%= fetch(link.url.to_s).description %></li>
+  					<li><a href="<%=link.url %>">Party On Code</a></li>
+  					<li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src %>"></li>
+  			    <li><%= link.try(:subtopic).try(:name) %></li>
+  			        <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
+  					<li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
+  					<!-- Displays the user name of the user who posted the link -->
+  			    <li><%= link.user.name %></li>   
+  			    <li><%= link_to "Comments", link_path(link) %> || (<%= link.comments.count %>)</li>   
+  			    	
+  			    	<!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
+  			   	<li>
+  			    		<%= link_to like_link_path(link), method: :put do %>
+  			    			
+  			    			Upvote
+  			    	
+  			    			<%= link.get_upvotes.size %>
 
-			<h4><%= link_to subtopic.name, topic_subtopic_path(@topic.id, subtopic) %></h4>
+  			    		<% end %> 
+  			    </li>
+  				</ul> 
+   		<% end %>
 
 
-		<% end %>
+   	<% end %>
+
+
 	</div>
 
-
+<div class=" col-md-5 text-right sidebar">
+  <h3>All Topics</h3>
+  <ul class="list-unstyled">
+    <% @topics.each do |topic| %>
+      <li><h4><%= link_to topic.name, topic_path(topic) %></h4></li>
+    <% end %>
+  </ul>
 </div>
+
+<div class=" col-md-5 text-right sidebar">
+  <h3>All Subtopics</h3>
+  <ul class="list-unstyled">
+    <% @subtopics.each do |subtopic| %>
+      <li><h4><%= link_to subtopic.name, subtopic_path(subtopic) %></h4></li>
+    <% end %>
+  </ul>
+</div>
+
+
+
+
+
 
 

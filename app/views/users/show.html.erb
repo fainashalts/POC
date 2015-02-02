@@ -1,19 +1,33 @@
-<h1><%= @user.name %></h1>
+<div class="row">
+	<div class=" col-md-2 subtitle">
+
+		<h1><%= @user.name %></h1>
+		  <ul class="list-unstyled">
+		  	<% if current_user %>
+				<li><%= link_to "Edit Your Profile", edit_user_registration_path %></li>
+				<li><%= link_to "Delete Your Profile", user_registration_path, method: :delete %></li>
+			<% end %>
+		  </ul>
+
+		<h2>Links I've Liked</h2>
+	</div>
+
+</div>
 
 
 <!-- This displays each of the links that a specific user has posted -->
+<div class="col-md-5">
 	<% @user.find_voted_items.each do |link| %>
 
-		<ul>
-			<li><%= link.title %></li>
-			<li><%= link.url %></li>
+		<ul class="list-unstyled">
+			<li><a href="<%=link.url %>"><%= link.url %></a></li>
 		</ul>
 
 
 	<% end %>
+</div>
 
 <!-- the code below allows users to edit and delete their own profiles. If you as the user are viewing someone else's profile, then you would not see the options to edit or delete. A before_filter has also been placed in the users controller to protect users from other users changing their information. -->
-<% if current_user %>
-	<%= link_to "Edit Your Profile", edit_user_registration_path %>
-	<%= link_to "Delete Your Profile", user_registration_path, method: :delete %>
-<% end %>
+
+
+

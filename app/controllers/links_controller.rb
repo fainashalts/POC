@@ -16,9 +16,10 @@ before_action :authenticate_user!, except: [:index, :show]
 
 	def index
 			@user = current_user
-
 			@link = Link.new
-			@links = Link.all		
+			@links = Link.all	
+			@subtopics = Subtopic.all	
+			@topics = Topic.all
 	end
 
 	def show

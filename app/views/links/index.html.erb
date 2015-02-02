@@ -1,58 +1,81 @@
-<h1>All Links</h1>
+<h1 class=" col-md-6 text-center subtitle row">All Links</h1></br>
 
+  <% if current_user %>
 
-
-<!-- This will display all of the links in our database, regardless of their user  -->
-<% @links.order(:cached_votes_total => :desc).each do  |link| %>
-
-        <ul>
-          <li><%= fetch(link.url.to_s).description %></li>
-          <li><%= fetch(link.url.to_s).title %>
-          <li><a href="<%=link.url %>">Party On Code</a></li>
-          <li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src%>"></li>
-          <li><%= link.try(:subtopic).try(:name) %></li>
-          
-          <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
-          <!-- we need a topic ID to use topic path- the confusing looking paramater being passed into topic_path is calling the topic ID through a link's subtopic -->
-          <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
-          
-          <!-- Displays the user name of the user who posted the link -->
-          <li><%= link.user.name %></li>
-          
-          <li><%= link_to "Comments", link_path(link) %></li>   
-            
-          <!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
-
-          <li>
-              <%= link_to like_link_path(link), method: :put do %>
-                
-                Upvote
-            
-                <%= link.get_upvotes.size %>
-
-              <% end %> 
-          </li>
-        </ul> 
-
-<% end %>
-
-<% if current_user %>
-
-  <div class="modal fade" id="add-link-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add a New Link!</h4>
-          </div>
-          <div class="modal-body">
-            <%= render 'links/form', object: @link %>
+    <div class="modal fade" id="add-link-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add a New Link!</h4>
+            </div>
+            <div class="modal-body">
+              <%= render 'links/form', object: @link %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add-link-modal">Add a Link</button>
 
 
-<% end %>
+      <div class="col-md-6 text-center">
+        <button type="button" class="btn btn-primary btn-lg text-center" data-toggle="modal" data-target="#add-link-modal">Add a Link</button>
+      </div>
+
+
+  <% end %>
+
+  <div class="col-md-6 text-left main-list">
+      <% @links.order(:cached_votes_total => :desc).each do  |link| %>
+
+          <ul class="list-unstyled">
+            <li><h4><%= fetch(link.url.to_s).title %></h4></li>
+            <li><%= fetch(link.url.to_s).description %></li>
+            <li><a href="<%= fetch(link.url.to_s).title %>"><%= fetch(link.url.to_s).title %></a></li>
+      
+            <li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src%>"></li>
+            <li><%= link_to link.try(:subtopic).try(:name), subtopic_path(link.subtopic) %></li>
+            
+            <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
+            <!-- we need a topic ID to use topic path- the confusing looking paramater being passed into topic_path is calling the topic ID through a link's subtopic -->
+            <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
+            
+            <!-- Displays the user name of the user who posted the link -->
+            <li>Posted By: <%= link.user.name %></li>
+            
+            <li><%= link_to "Comments", link_path(link) %></li>   
+              
+            <!-- The following block of code allows a user to upvote a link and tallies the specific link's upvotes  -->
+
+            <li>
+                <%= link_to like_link_path(link), method: :put do %>
+                  
+                  Upvote
+              
+                  <%= link.get_upvotes.size %>
+
+                <% end %> 
+            </li>
+          </ul> 
+
+    <% end %>
+
+
+  </div>
+
+<div class=" col-md-5 text-right sidebar">
+  <h3>All Topics</h3>
+  <ul class="list-unstyled">
+    <% @topics.each do |topic| %>
+      <li><h4><%= link_to topic.name, topic_path(topic) %></h4></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class=" col-md-5 text-right sidebar">
+  <h3>All Subtopics</h3>
+  <ul class="list-unstyled">
+    <% @subtopics.each do |subtopic| %>
+      <li><h4><%= link_to subtopic.name, subtopic_path(subtopic) %></h4></li>
+    <% end %>
+  </ul>
+</div>
