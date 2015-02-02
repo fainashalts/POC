@@ -6,10 +6,10 @@
 <% @links.order(:cached_votes_total => :desc).each do  |link| %>
 
         <ul>
-          <li><%= fetch(link.url.to_s).description %></li>
-          <li><%= fetch(link.url.to_s).title %>
-          <li><a href="<%=link.url %>">Party On Code</a></li>
-          <li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src%>"></li>
+          <li><%= fetch(link.url.to_s).try(:title)%>
+          <li><%= fetch(link.url.to_s).try(:description) %></li>
+          <li><a href="<%=link.url %>">Click to Party On Code</a></li>
+          <li><img class="link-img" src="<%= fetch(link.url.to_s).try(:images).first.src%>" alt="No Image!"></li>
           <li><%= link.try(:subtopic).try(:name) %></li>
           
           <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
