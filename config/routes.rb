@@ -35,9 +35,9 @@ Rails.application.routes.draw do
   end
 
 
-    resources :topics do
-      resources :subtopics
-    end
+  resources :topics do
+    resources :subtopics
+  end
 
   get "/subtopics/:id" => 'subtopics#show', as: :subtopic
   get "/subtopics/new" => "subtopics#new", as: :subtopics

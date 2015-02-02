@@ -38,9 +38,10 @@ gem 'factory_girl_rails'
 # Add Devise
 gem 'devise'
 
-# gem to allow us to show thumbnails of links submitted by users
+# gem to allow us to show thumbnails of links submitted by users, with their titles, descriptioons, and image scraped using the url provided by the user
 gem 'link_thumbnailer'
 
+# this gem provides the basic functionality of making our links votable and allowing users to upvote the links they like. It further makes it possible to show which links were upvoted by a particular user
 gem 'acts_as_votable', '~> 0.10.0'
 
 group :development, :test do
@@ -53,6 +54,8 @@ group :development, :test do
 end
 
 gem 'rails_12factor', group: :production 
+
+gem 'rspec_junit_formatter', :github => 'circleci/rspec_junit_formatter', group: :test
 
 # Use unicorn as the app server
 # gem 'unicorn'
