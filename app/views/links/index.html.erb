@@ -27,10 +27,8 @@
       <% @links.order(:cached_votes_total => :desc).each do  |link| %>
 
           <ul class="list-unstyled">
-            <li><h4><%= fetch(link.url.to_s).title %></h4></li>
-            <li><%= fetch(link.url.to_s).description %></li>
-            <li><a href="<%= fetch(link.url.to_s).title %>"><%= fetch(link.url.to_s).title %></a></li>
-      
+            <li><h4><a href="<%= link.url %>"><%= fetch(link.url.to_s).title %></h4></li>
+            <li><%= fetch(link.url.to_s).description %></li>      
             <li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src%>"></li>
             <li><%= link_to link.try(:subtopic).try(:name), subtopic_path(link.subtopic) %></li>
             

@@ -30,9 +30,8 @@
   <!--  	We want to display the links that belong to each of @topic's subtopics, so we put @links = Link.all in the show method of the topics controller, and we're using this conditional statement to show only the links that belong to a subtopic which belongs to the current topic page -->
    		<% if link.subtopic.topic_id == @topic.id %>
   				<ul class="list-unstyled">
-  					<li><h4><%= fetch(link.url.to_s).title %></h4></li>
+  					<li><h4><a href="<%=link.url %>"><%= fetch(link.url.to_s).title %></a></h4></li>
   					<li><%= fetch(link.url.to_s).description %></li>
-  					<li><a href="<%=link.url %>">Party On Code</a></li>
   					<li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src %>"></li>
   			    <li><%= link.try(:subtopic).try(:name) %></li>
   			        <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->

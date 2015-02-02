@@ -29,9 +29,8 @@
   <% @subtopic.links.order(:cached_votes_total => :desc).each do |link| %>
   	
   	<ul class="list-unstyled">
-  		<li><h4><%= fetch(link.url.to_s).title %></h4></li>
+  		<li><h4><a href="<%= link.url %>"><%= fetch(link.url.to_s).title %></a></h4></li>
           <li><%= fetch(link.url.to_s).description %></li>
-          <li><a href="<%= link.url %>"><%= link.url %></a></li>
           <li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src %>"></li>
           <li><%= link.subtopic.name %></li>
           <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
