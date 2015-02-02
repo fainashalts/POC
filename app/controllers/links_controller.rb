@@ -41,7 +41,7 @@ before_action :authenticate_user!, except: [:index, :show]
 	
 			@object = LinkThumbnailer.generate(@link.url)
 		
-		rescue
+		rescue Exception
 			redirect_to :back
 			# render :text => "Sorry, that link is invalid! Please hit your browser's back button to return to Party On Code and try again!"
 			puts "This link is invalid. Please try again!"
