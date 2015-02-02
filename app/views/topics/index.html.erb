@@ -38,7 +38,7 @@
   <script>
   $(function(){
 
-    $.getJSON("http://localhost:3000/api/subtopics", function(response, status, jqXHR){
+    $.getJSON("http://partyoncode.herokuapp.com/api/subtopics", function(response, status, jqXHR){
 
       console.log(response);
       
@@ -57,11 +57,11 @@
       $(".link-list").html(
           "<h3 class='oswald'>Popular Subtopics</h3></br>" +
           "<ul class='list-unstyled'>" +
-            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[0].id + "'>" + response[0].name + "</a></h4></li>" +
-            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[1].id + "'>" + response[1].name + "</a></h4></li>" +
-            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[2].id + "'>" + response[2].name + "</a></h4></li>" +
-            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[3].id + "'>" + response[3].name + "</a></h4></li>" +
-            "<li><h4 class='oswald'><a href='http://localhost:3000/subtopics/" + response[4].id + "'>" + response[4].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='partyoncode.herokuapp.com/subtopics/" + response[0].id + "'>" + response[0].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='http://partyoncode.herokuapp.com/subtopics/" + response[1].id + "'>" + response[1].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='http://partyoncode.herokuapp.com/subtopics/" + response[2].id + "'>" + response[2].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='http://partyoncode.herokuapp.com/subtopics/" + response[3].id + "'>" + response[3].name + "</a></h4></li>" +
+            "<li><h4 class='oswald'><a href='http://partyoncode.herokuapp.com/subtopics/" + response[4].id + "'>" + response[4].name + "</a></h4></li>" +
           "</ul>"
 
       );
