@@ -40,14 +40,13 @@
 
     $.getJSON("http://partyoncode.herokuapp.com/api/subtopics", function(response, status, jqXHR){
 
-      console.log(response);
-      
       function compare(a,b) {
-        if (a.links.count > b.links.count)
+        if (a.links.length > b.links.length)
            return -1;
-        if (a.links.count < b.links.count)
+        if (a.links.length < b.links.length)
           return 1;
         return 0;
+        console.log(a)
       }
 
       response.sort(compare);
