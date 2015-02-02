@@ -39,7 +39,7 @@ before_action :authenticate_user!, except: [:index, :show]
 			@link = current_user.links.new(link_params)
 		
 	
-			@object = LinkThumbnailer.generate(@link.url)
+			@object = LinkThumbnailer.generate(@link.url, verify_ssl: false)
 		
 		rescue Exception
 			redirect_to :back
