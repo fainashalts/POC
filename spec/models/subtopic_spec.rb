@@ -9,4 +9,9 @@ RSpec.describe Subtopic, :type => :model do
     subtopic = FactoryGirl.build(:subtopic)
     expect(subtopic.name).to_not be_nil
   end
+
+  it "belongs to a topic" do
+    subtopic = FactoryGirl.build(:subtopic)
+    expect(subtopic.topic_id).to_not be_nil
+  end
 end
