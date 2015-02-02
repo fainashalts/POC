@@ -3,4 +3,6 @@ FactoryGirl.define do
     name "Topic"
   end
 
+  
+
 end
