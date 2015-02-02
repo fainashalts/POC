@@ -1,4 +1,6 @@
                     # **Party On Code**
+[![Circle CI](https://circleci.com/gh/fainashalts/testing.svg?style=svg)](https://circleci.com/gh/fainashalts/testing)
+
 ## written by *Faina Shalts, Alex Wines, and Joshua Munene*
 
 
