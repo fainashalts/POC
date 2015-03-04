@@ -2,7 +2,7 @@
 	<h1><a href="<%= @link.url %>"><%= fetch(@link.url.to_s).title %></a></h1>
 	<h3><%= fetch(@link.url.to_s).description%></h3>
 	<img class="link-img" src= "<%= fetch(@link.url.to_s).images.first.src %>">
-	<%= link_to "Delete this link", links_path, method: :delete, data: {confirm: "Are you sure you want to delete this link?"}%>
+	<% if current_user.admin %> <%= link_to "Delete this link", links_path, method: :delete, data: {confirm: "Are you sure you want to delete this link?"}%><%end %>
 </div>	
 
 <h2>Comments</h2>
