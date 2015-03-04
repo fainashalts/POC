@@ -3,7 +3,7 @@ require 'link_thumbnailer'
 class LinksController < ApplicationController
 # before filter so that only admins can edit and destroy links; might want to allow the user who added a link to edit it (say, if they typed something incorrectly). Something we as a group should decide.
 before_filter :admin, :only => [:edit, :destroy]	
-before_action :authenticate_user!, except: [:index, :show]
+before_action :authenticate_user!, except: [:index]
 
 	
 	def upvote
