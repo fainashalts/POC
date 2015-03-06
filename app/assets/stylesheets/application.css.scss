@@ -138,4 +138,29 @@ div.col-md-5.text-right.sidebar {
   font-size: 18px;
   padding: 10px;
 }
+.link-list {
+  background-color: rgba(30, 30, 30, .6);
+}
+#nav-list {
+  font-size: 20px;
+}
+#nav-list-signin {
+  font-size: 20px;
+}
 
+.btn-custom {
+  background-color: hsl(81, 80%, 37%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b7ec55", endColorstr="#74a912");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#b7ec55), to(#74a912));
+  background-image: -moz-linear-gradient(top, #b7ec55, #74a912);
+  background-image: -ms-linear-gradient(top, #b7ec55, #74a912);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b7ec55), color-stop(100%, #74a912));
+  background-image: -webkit-linear-gradient(top, #b7ec55, #74a912);
+  background-image: -o-linear-gradient(top, #b7ec55, #74a912);
+  background-image: linear-gradient(#b7ec55, #74a912);
+  border-color: #74a912 #74a912 hsl(81, 80%, 30.5%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.42);
+  -webkit-font-smoothing: antialiased;
+}

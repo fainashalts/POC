@@ -1,4 +1,4 @@
-<h1 class=" col-md-6 text-center subtitle row"><%= @topic.name %></h1></br>
+<h1 class="col-md-offset-2 col-md-8 text-center subtitle row"><%= @topic.name %></h1></br>
 
   <% if current_user %>
 
@@ -17,8 +17,8 @@
       </div>
 
 
-      <div class="col-md-6 text-center">
-        <button type="button" class="btn btn-primary btn-lg text-center" data-toggle="modal" data-target="#add-link-modal">Add a Link</button>
+      <div class="col-md-offset-2 col-md-8 text-center">
+        <button type="button" class="btn btn-custom btn-lg text-center" data-toggle="modal" data-target="#add-link-modal">Add a Link</button>
       </div>
 
 
@@ -59,6 +59,15 @@
 	</div>
 
 <div class=" col-md-5 text-right sidebar">
+  <h3><%= @topic.name %> Subtopics</h3>
+  <ul class="list-unstyled">
+    <% @topic.subtopics.each do |subtopic| %>
+      <li><h4><%= link_to subtopic.name, subtopic_path(subtopic) %></h4></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class=" col-md-5 text-right sidebar">
   <h3>All Topics</h3>
   <ul class="list-unstyled">
     <% @topics.each do |topic| %>
@@ -67,14 +76,7 @@
   </ul>
 </div>
 
-<div class=" col-md-5 text-right sidebar">
-  <h3>All Subtopics</h3>
-  <ul class="list-unstyled">
-    <% @subtopics.each do |subtopic| %>
-      <li><h4><%= link_to subtopic.name, subtopic_path(subtopic) %></h4></li>
-    <% end %>
-  </ul>
-</div>
+
 
 
 

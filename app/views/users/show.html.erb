@@ -1,7 +1,7 @@
 <div class="row">
 	<div class=" col-md-2 subtitle">
 
-		<h1><%= @user.name %></h1>
+		<h1>Welcome, <%= @user.name %>!</h1>
 		  <ul class="list-unstyled">
 		  	<% if current_user %>
 				<li><%= link_to "Edit Your Profile", edit_user_registration_path %></li>

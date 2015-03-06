@@ -14,14 +14,14 @@
 		<nav class="navbar nav-style">
 			<h1 class="col-md-6 text-center"><%= link_to "party ", root_path, :class => "green" %><%= link_to "( ", root_path, :class => "white" %><%= link_to "on", root_path, :class => "orange" %><%= link_to " ) { ", root_path, :class => "white" %><%= link_to "code", root_path, :class => "red" %><%= link_to " };", root_path, :class => "white" %></h1>
 			<% if user_signed_in? %>
-			   		<ul class="col-md-5 list-unstyled list-inline text-right">
+			   		<ul id="nav-list" class="col-md-5 list-unstyled list-inline text-right">
 							<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
 	          <!-- added link to user profile so that a user could see what links they have upvoted  -->
 		   	      <li><%= link_to "Your Profile", user_path(current_user) %> </li>
 		   	      <li><%= link_to "All Links", links_path %>
 					</ul>
 			<% else %>
-			   	<ul class="col-md-5 list-unstyled list-inline text-right">
+			   	<ul id="nav-list-signin" class="col-md-5 list-unstyled list-inline text-right">
 						<li><%= link_to "Sign In", signin_path %></li>
 						<li><%= link_to "All Links", links_path %>
 					</ul>
