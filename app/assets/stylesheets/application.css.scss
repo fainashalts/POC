@@ -20,6 +20,7 @@
 
 body {
   font-family: 'Source Code Pro';
+  padding-bottom: 150px;
 }
 
 .nav-style {
@@ -39,6 +40,8 @@ body {
 
 .oswald {
   font-family: 'Oswald', sans-serif; 
+  display: inline;
+  padding: 5px;
 }
 
 .footer {
@@ -64,7 +67,7 @@ body {
   margin-top: 10px;
   margin-left: 50px;
   border: 5px solid black;
-  background-color: rgba(30, 30, 30, .8);
+  background-color: rgba(30, 30, 30, .6);
 }
 
 .main {
@@ -119,4 +122,20 @@ body {
   color: white
 }
 
+#footer {
+  margin-top: 20px;
+}
+
+div.col-md-5.text-right.sidebar {
+  margin-bottom: 100px;
+}
+
+#topic-menu {
+  height: 300px;
+  font-size: 80px;
+}
+#dropdownMenu1 {
+  font-size: 18px;
+  padding: 10px;
+}
 

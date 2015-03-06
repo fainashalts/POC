@@ -37,7 +37,7 @@
             <li><% if current_user.try(:admin?)%><%= link_to 'Delete', link_path(link), method: :delete, data: { confirm: 'Are you sure?' } %><%end%></li>
             
             <!-- Displays the user name of the user who posted the link -->
-            <li>Posted By: <%= link.user.name %></li>
+            <li>Posted By: <%= link.user.try(:name) %></li>
             
             <li><%= link_to "Comments", link_path(link) %></li>   
               
