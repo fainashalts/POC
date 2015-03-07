@@ -29,7 +29,7 @@
           <ul class="list-unstyled">
             <li><h4><a href="<%= link.url %>"><%= fetch(link.url.to_s).title %></h4></li>
             <li><%= fetch(link.url.to_s).description %></li>      
-            <li><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src%>"></li>
+            <li><% if fetch(link.url.to_s).images.first != nil %><img class="link-img" src="<%= fetch(link.url.to_s).images.first.src%>"><%end%></li>
             <li><%= link_to link.try(:subtopic).try(:name), subtopic_path(link.subtopic) %></li>
             
             <!-- the code below allows administrators to delete a link from the index; the link does not show up on the page for users who are not a administrator -->
