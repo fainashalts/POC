@@ -6,7 +6,7 @@
     <div id="topic-menu" class="col-md-12 main nav-style">
       <% @topics.each do |topic| %>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
           <button class="btn  dropdown-toggle nav-style text-center" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"><%= link_to topic.name, topic_path(topic) %>
           <span class="caret"></span>
           </button>
